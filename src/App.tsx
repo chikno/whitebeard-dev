@@ -1,33 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { SplitScreen } from './components/split-screen'
+
+
+
+const LeftSideComponent = ({title}: {title : string}) => {
+  return (
+    <h2 className="text-xl bg-slate-700 text-white">I'm {title}</h2>
+  )
+}
+const RightSideComponent = ({title}: {title : string}) => {
+  return (
+    <h2 className='text-xl bg-stone-900 text-white'>I'm {title}</h2>
+  )
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <SplitScreen leftWidth={1} rightWidth={3}>
+        <LeftSideComponent title={'Left'} />
+        <RightSideComponent title={'Right'}  />
+      </SplitScreen>
     </>
   )
 }
