@@ -1,7 +1,7 @@
 import type { AxiosError } from 'axios';
 import { createMutation, CreateMutationOptions } from 'react-query-kit';
 
-import { client } from './client';
+import { client } from '../common/client';
 import type { AuthStatus } from '../types/types';
 
 type Variables = { username: string; password: string };

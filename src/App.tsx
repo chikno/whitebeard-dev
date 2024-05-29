@@ -1,9 +1,8 @@
-import React from 'react';
 import './App.css';
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useLogin } from './common/use-login';
+import { useLogin } from './hooks/use-login';
 import { AuthStatus } from './types/types';
 import { AxiosError } from 'axios';
 
