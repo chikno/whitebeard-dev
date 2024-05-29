@@ -23,8 +23,8 @@ function App() {
 
   return (
     <div className='flex-1'>
-      {data && data.map((post:Service, index:number) => {
-        return renderItem(post, index)
+      {data && data.map((service:Service, index:number) => {
+        return renderItem(service, index)
       })}
     </div>
   )
