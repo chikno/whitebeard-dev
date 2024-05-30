@@ -1,33 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { LargeAuthorListItem } from './components/authors/LargeListItems';
+import { SmallAuthorListItem } from './components/authors/SmallListItems';
+import { LargeBookListItems } from './components/books/LargeListItems';
+import { SmallBookListItem } from './components/books/SmallListItems';
+import { RegularList } from './components/lists/Regular'
+import { NumberedList } from './components/lists/numbered';
+import { authors } from './data/authors';
 
+import { books } from './data/books';
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <RegularList
+        items={authors}
+        sourceName={'author'}
+        ItemComponent={SmallAuthorListItem} />
+
+      <NumberedList
+        items={authors}
+        sourceName={'author'}
+        ItemComponent={LargeAuthorListItem} />
+
+      <RegularList
+        items={books}
+        sourceName={'book'}
+        ItemComponent={SmallBookListItem} />
+
+      <NumberedList
+        items={books}
+        sourceName={'book'}
+        ItemComponent={LargeBookListItems} />
     </>
   )
 }
