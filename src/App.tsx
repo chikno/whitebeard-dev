@@ -1,17 +1,15 @@
-import './App.css'
-import { useServices } from './hooks/use-services';
-import type { Service } from './types/types';
-function App() {
-  const { data, isLoading, isError } = useServices();
+import React from 'react';
 
-  const renderItem = (service:Service, index:number) => {
-    return (
-      <div key={index} className='flex flex-col items-center justify-between'>
-        <h3 className='font-bold text-xl'  >{service.title}</h3>
-        <p>{service.body}</p>
-      </div>
-    )
-  }
+import { Card } from './components/card';
+import { useProducts } from './hooks/use-products';
+import { Product } from './types/product';
+import { StickyNavbar } from './components/sticky-navbar';
+import { useAddtoCart } from './store';
+import { List } from './components/list';
+
+
+function App() {
+  const { data: products, isLoading, isError } = useProducts();
 
   if (isLoading) {
     return <div className='flex-1'>Loading...</div>
@@ -22,11 +20,13 @@ function App() {
   }
 
   return (
-    <div className='flex-1'>
-      {data && data.map((service:Service, index:number) => {
-        return renderItem(service, index)
-      })}
-    </div>
+    <>
+      <StickyNavbar />
+      <div className='flex-1 gap-2 grid md:grid-cols-3 grid-cols-1'>
+        <List className='relative m-10 w-full flex flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md'
+         showActions={false} products={products} showAddtoCart={true} />
+      </div>
+    </>
   )
 }
 
