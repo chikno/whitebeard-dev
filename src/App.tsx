@@ -1,36 +1,32 @@
 import './App.css'
-import { LargeAuthorListItem } from './components/authors/LargeListItems';
-import { SmallAuthorListItem } from './components/authors/SmallListItems';
-import { LargeBookListItems } from './components/books/LargeListItems';
-import { SmallBookListItem } from './components/books/SmallListItems';
-import { RegularList } from './components/lists/Regular'
-import { NumberedList } from './components/lists/numbered';
-import { authors } from './data/authors';
-
-import { books } from './data/books';
+import { useServices } from './hooks/use-services';
+import type { Service } from './types/types';
 function App() {
+  const { data, isLoading, isError } = useServices();
+
+  const renderItem = (service:Service, index:number) => {
+    return (
+      <div key={index} className='flex flex-col items-center justify-between'>
+        <h3 className='font-bold text-xl'  >{service.title}</h3>
+        <p>{service.body}</p>
+      </div>
+    )
+  }
+
+  if (isLoading) {
+    return <div className='flex-1'>Loading...</div>
+  }
+
+  if (isError) {
+    return <div className='flex-1'>An error occured</div>
+  }
+
   return (
-    <>
-      <RegularList
-        items={authors}
-        sourceName={'author'}
-        ItemComponent={SmallAuthorListItem} />
-
-      <NumberedList
-        items={authors}
-        sourceName={'author'}
-        ItemComponent={LargeAuthorListItem} />
-
-      <RegularList
-        items={books}
-        sourceName={'book'}
-        ItemComponent={SmallBookListItem} />
-
-      <NumberedList
-        items={books}
-        sourceName={'book'}
-        ItemComponent={LargeBookListItems} />
-    </>
+    <div className='flex-1'>
+      {data && data.map((service:Service, index:number) => {
+        return renderItem(service, index)
+      })}
+    </div>
   )
 }
 
